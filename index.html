@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div>
+        <p id="1"></p>
+    </div>
+    <div>
+        <p id="2"></p>
+    </div>
+    <div>
+        <p id="3"></p>
+    </div>
+    <div>
+        <p id="4"></p>
+    </div>
+    <div>
+        <p id="5"></p>
+    </div>
+
+
+
+    <script>
+        class Student {
+            constructor(name, address, phone, course) {
+                this.name = name;
+                this.address = address;
+                this.phone = phone;
+                this.course = course;
+
+            }
+
+            get GetInfo() {
+                return ("Name: " + this.name + '\n' + "Adress: " + this.address + '\n' + "phone: " + this.phone + '\n' + "course: " + this.course);
+            }
+
+        }
+
+        var storedText;
+        var s;
+        var fullList;
+        var S = [];
+
+
+        async function callFetch() {
+            let response = await fetch('https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt')
+
+            let text = await response.text();
+            storedText = text;
+        }
+
+
+        function setVariables() {
+            fullList = storedText.split('\r\n');
+
+            for (let i = 1; i < 6; i++) {
+
+                this.Student = new Student(String(fullList[i * 4 - 4]), String(fullList[i * 4 - 3]), String(fullList[i * 4 - 2]), String(fullList[i * 4 - 1]))
+                S.push(this.Student);
+
+            }
+
+            for (let i = 1; i < 6; i++) {
+                var Info = S[i - 1].GetInfo;
+                console.log(Info);
+                var key = String(i);
+                var element = document.getElementById(key);
+                element.innerHTML = Info;
+
+
+            }
+
+
+        }
+
+
+        async function test() {
+            await callFetch();
+            setVariables();
+        };
+        test();
+
+
+
+
+    </script>
+</body>
+
+</html>
